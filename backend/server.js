@@ -4,7 +4,7 @@ const mongooes = require('mongoose');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
-
+const PORT = process.env.PORT || 5000;
 
 const  app = express();
 app.use(cors());
@@ -14,6 +14,7 @@ app.use(fileUpload({
     useTempFiles: true,
 }));
 
+const UserRouter = require('./router/userRouter');
 // Connect to MongoDB
 const URL = process.env.MONGODB_URI;
 mongooes.connect(URL, {
@@ -26,13 +27,14 @@ mongooes.connect(URL, {
         console.log('MongoDB Connected');
     }
 });
-
+app.use('/user',UserRouter);
 app.get('/',(req,res)=>{
     res.send('Hello World');
 }
 );
 
-app.listen(process.env.PORT || 5000, () => {
-    console.log('Server started');
+
+app.listen(PORT, () => {
+    console.log(`Server started ${PORT}`);
 }
 );
