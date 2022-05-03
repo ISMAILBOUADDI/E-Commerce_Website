@@ -1,4 +1,5 @@
 const User = require('../models/userModels');
+const bycryptjs = require('bcryptjs');
 
 const userCtrl = {
     signup: async(req, res) => {
@@ -22,10 +23,11 @@ const userCtrl = {
                     msg: 'Password must be at least 6 characters'
             })
            }
+           const passwordHash = await bycryptjs.hash(password, 10);
             const newUser = new User({
                 name,
                 email,
-                password,
+                password: passwordHash,
                 role
             });
             await newUser.save();
