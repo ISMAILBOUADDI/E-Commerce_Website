@@ -1,5 +1,6 @@
 const User = require('../models/userModels');
 const bycryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const userCtrl = {
     signup: async(req, res) => {
@@ -34,6 +35,8 @@ const userCtrl = {
             // save mongodb
             await newUser.save();
             // Then create jsonwebtoken to authentication
+            const accessToken =createAccessToken({id:newUser._id})
+
             res.json({
                 msg: 'User created'
             });
@@ -45,6 +48,8 @@ const userCtrl = {
         }
     },
 };
-
+const createAccessToken (user)=>{
+    return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn:'15s'});
+}
 
 module.exports = userCtrl;
