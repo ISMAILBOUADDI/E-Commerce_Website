@@ -23,6 +23,7 @@ const userCtrl = {
                     msg: 'Password must be at least 6 characters'
             })
            }
+           // Password encryption
            const passwordHash = await bycryptjs.hash(password, 10);
             const newUser = new User({
                 name,
@@ -30,7 +31,9 @@ const userCtrl = {
                 password: passwordHash,
                 role
             });
+            // save mongodb
             await newUser.save();
+            // Then create jsonwebtoken to authentication
             res.json({
                 msg: 'User created'
             });
