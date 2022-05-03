@@ -17,6 +17,11 @@ const userCtrl = {
                     msg: 'User already exists'
                 });
             }
+            if(password.length<6){
+                return res.status(400).json({
+                    msg: 'Password must be at least 6 characters'
+            })
+           }
             const newUser = new User({
                 name,
                 email,
