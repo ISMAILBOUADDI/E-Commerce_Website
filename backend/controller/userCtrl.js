@@ -36,10 +36,10 @@ const userCtrl = {
             await newUser.save();
             // Then create jsonwebtoken to authentication
             const accessToken =createAccessToken({id:newUser._id})
-
-            res.json({
-                msg: 'User created'
-            });
+            res.json({accessToken})
+            // res.json({
+            //     msg: 'User created'
+            // });
         } catch (err) {
             console.log(err);
             res.status(500).json({
