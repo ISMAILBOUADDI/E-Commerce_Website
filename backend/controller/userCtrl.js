@@ -36,6 +36,12 @@ const userCtrl = {
             await newUser.save();
             // Then create jsonwebtoken to authentication
             const accessToken =createAccessToken({id:newUser._id})
+            const refreshToken =createRefreshToken({id:newUser._id})
+
+            res.cookie('refreshtoken',refreshToken,{
+                httpOnly:true,
+                path :'/user/refreshtoken'
+            })
             res.json({accessToken})
             // res.json({
             //     msg: 'User created'
@@ -49,8 +55,10 @@ const userCtrl = {
     },
 };
 const createAccessToken=(user)=>{
-    return jwt.sign(user,process.env.ACCESS_TOKEN_SECRET,{expiresIn:'15s'})
+    return jwt.sign(user,process.env.ACCESS_TOKEN_SECRET,{expiresIn:'1d'})
 }
-
+const refreshToken=(user)=>{
+    return jwt.sign(user,process.env.REFRESH_TOKEN_SECRET,{expiresIn:'7d'})
+}
 
 module.exports = userCtrl;
