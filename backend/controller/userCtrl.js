@@ -54,6 +54,8 @@ const userCtrl = {
         }
     },
     refreshToken: async(req, res) => {
+       const refreshToken = req.cookies.refreshtoken
+       res.Json({refreshToken})
     }
 };
 const createAccessToken=(user)=>{
