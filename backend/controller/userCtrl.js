@@ -53,6 +53,18 @@ const userCtrl = {
             });
         }
     },
+    login: async(req, res) => {
+    try{
+        const {email,password} = req.body;
+        const user = await User.findOne({email})
+        if(!user) return res.status(400).json({msg:'User does not exist'})
+        const isMatch = await bycryptjs.compare(password,user.password)
+        if(!isMatch) return res.status(400).json({msg:'Incorrect password'})
+        
+    }catch(err){
+            return res.status(500).json({msg:err.message})
+        }
+    },
     refreshToken: async(req, res) => {
       try {
         const refreshToken = req.cookies.refreshtoken
