@@ -32,7 +32,7 @@ mongooes.connect(URL, {
 app.use('/user',UserRouter);
 app.use('/api', CategoryRouter)
 app.use('/api', updateRouter)
-// app.use('/api', require('./routes/productRouter'))s
+// app.use('/api', require('./routes/productRouter'))
 app.get('/',(req,res)=>{
     res.send('Hello World');
 }
