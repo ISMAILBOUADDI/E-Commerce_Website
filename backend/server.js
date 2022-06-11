@@ -15,6 +15,8 @@ app.use(fileUpload({
 }));
 
 const UserRouter = require('./router/userRouter');
+const CategoryRouter = require('./router/categoryRouter');
+const updateRouter = require('./router/upload');
 // Connect to MongoDB
 const URL = process.env.MONGODB_URI;
 mongooes.connect(URL, {
@@ -28,9 +30,9 @@ mongooes.connect(URL, {
     }
 });
 app.use('/user',UserRouter);
-app.use('/api', require('./routes/categoryRouter'))
-app.use('/api', require('./routes/upload'))
-app.use('/api', require('./routes/productRouter'))
+app.use('/api', CategoryRouter)
+app.use('/api', updateRouter)
+// app.use('/api', require('./routes/productRouter'))s
 app.get('/',(req,res)=>{
     res.send('Hello World');
 }
