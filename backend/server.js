@@ -28,6 +28,9 @@ mongooes.connect(URL, {
     }
 });
 app.use('/user',UserRouter);
+app.use('/api', require('./routes/categoryRouter'))
+app.use('/api', require('./routes/upload'))
+app.use('/api', require('./routes/productRouter'))
 app.get('/',(req,res)=>{
     res.send('Hello World');
 }
