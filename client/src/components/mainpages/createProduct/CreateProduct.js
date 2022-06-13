@@ -2,7 +2,7 @@ import React, {useState, useContext, useEffect} from 'react'
 import axios from 'axios'
 import {GlobalState} from '../../../GlobalState'
 import Loading from '../utils/loading/Loading'
-import {useHistory, useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 
 const initialState = {
     product_id: '',
@@ -25,7 +25,7 @@ function CreateProduct() {
     const [isAdmin] = state.userAPI.isAdmin
     const [token] = state.token
 
-    const history = useHistory()
+    const history = useNavigate()
     const param = useParams()
 
     const [products] = state.productsAPI.products
